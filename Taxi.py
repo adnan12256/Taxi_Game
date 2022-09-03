@@ -1,6 +1,7 @@
 from random import randint
 
 
+# Keeping track of my Taxi poition using this class
 class Pos:
     xpos = 0
     ypos = 0
@@ -10,6 +11,7 @@ class Pos:
         Pos.ypos = Pos.ypos + y
 
 
+# This is my game board
 game_path = ["| | | | | | | | | | |",
              "| | | | | | | | | | |",
              "| | | | | | | | | | |",
@@ -17,11 +19,13 @@ game_path = ["| | | | | | | | | | |",
              "| | | | | | | | | | |"]
 
 
+# This function prints the board
 def print_path():
     for i in game_path:
         print(i)
 
 
+# This function takes the col, row and pointer as the argument and adds the pointer in that element
 def add_value(num, cell, pointer):
     # print(num, cell)
     temp_string = ""
@@ -32,6 +36,7 @@ def add_value(num, cell, pointer):
     game_path[cell] = temp_string
 
 
+# This function is used to move the taxi until it reaches its target element
 def moving_taxi(target_x, target_y):
     moving = True
     while moving:
@@ -39,7 +44,8 @@ def moving_taxi(target_x, target_y):
             add_value(Pos.xpos, Pos.ypos, " ")
             add_value(passenger_posx, passenger_posy, " ")
             break
-        move = input("\nMake your move (WASD) or press any other key to quit. Position: " + str(Pos.xpos) + "," + str(Pos.ypos) + "\n")
+        move = input("\nMake your move (WASD) or press any other key to quit. Position: " + str(Pos.xpos) + "," + str(
+            Pos.ypos) + "\n")
         if move == "w":
             add_value(Pos.xpos, Pos.ypos, " ")
             Pos(0, -1)
@@ -101,20 +107,25 @@ game = True
 while game:
     main_menu = input("Press P to play, I for instructions and press anything else to exit the game! ")
     if main_menu == "p":
-        
+
         print("```````````````````````````````````````````````````````````````````````````````````````````````````````")
         print("Passanger is waiting. Pick up the passanger!")
         print("```````````````````````````````````````````````````````````````````````````````````````````````````````")
-        
         passenger_posx, passenger_posy = randint(0, 9), randint(0, 4)
+
+        # Passanger pointer P is added to the board using the passanger position
         add_value(passenger_posx, passenger_posy, "P")
+
         # Taxi position is saved to Pos class. It can be modifed by using Pos(x,y). For example, Pos(0, 1) would
         # move the taxi one unit down
         Pos.xpos = 0
         Pos.ypos = 0
-        # print(Pos.xpos, Pos.ypos)
+
+        # Sets Taxi at (0,0)
         add_value(0, 0, "T")
         print_path()
+
+        # Moves taxi until it reaches passanger location
         moving_taxi(passenger_posx, passenger_posy)
 
         print("```````````````````````````````````````````````````````````````````````````````````````````````````````")
@@ -122,9 +133,13 @@ while game:
         print("```````````````````````````````````````````````````````````````````````````````````````````````````````")
 
         home_posx, home_posy = randint(0, 9), randint(0, 4)
+
+        # Adds home pointer onto the board
         add_value(home_posx, home_posy, "H")
         add_value(Pos.xpos, Pos.ypos, "T")
         print_path()
+
+        # Moves taxi until it reaches homes location
         moving_taxi(home_posx, home_posy)
 
         print("```````````````````````````````````````````````````````````````````````````````````````````````````````")
