@@ -101,9 +101,11 @@ game = True
 while game:
     main_menu = input("Press P to play, I for instructions and press anything else to exit the game! ")
     if main_menu == "p":
+        
         print("```````````````````````````````````````````````````````````````````````````````````````````````````````")
         print("Passanger is waiting. Pick up the passanger!")
         print("```````````````````````````````````````````````````````````````````````````````````````````````````````")
+        
         passenger_posx, passenger_posy = randint(0, 9), randint(0, 4)
         add_value(passenger_posx, passenger_posy, "P")
         # Taxi position is saved to Pos class. It can be modifed by using Pos(x,y). For example, Pos(0, 1) would
